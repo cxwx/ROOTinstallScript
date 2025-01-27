@@ -17,7 +17,7 @@ if [[ "$(uname)" == "Darwin" ]]; then
   export CPPFLAGS="-I/opt/homebrew/opt/postgresql@14/include/postgresql@14/"
   CMAKE_PARAMS="-Dcocoa=ON -DPOSTGRESQL_LIBRARY=/opt/homebrew/opt/postgresql@14/lib/postgresql@14/libpq.dylib -DPOSTGRESQL_INCLUDE_DIR=/opt/homebrew/opt/postgresql@14/include/"
 else
-  CMAKE_PARAMS="-GNinja"
+  CMAKE_PARAMS="-GNinja -Dx11=ON"
 fi
 
 cmake -DCMAKE_INSTALL_PREFIX="${HOME}/software/ROOT/install/" ../root \
