@@ -1,15 +1,4 @@
-# *************************************************************************** #
-#                                                                             #
-#                                                        :::      ::::::::    #
-#    sh4_install_root_cmake.sh                         :+:      :+:    :+:    #
-#                                                    +:+ +:+         +:+      #
-#    By: chenxu <chenxu@mail.ustc.edu.cn>          +#+  +:+       +#+         #
-#                                                +#+#+#+#+#+   +#+            #
-#    Created: 2020/02/26 17:34:36 by chenxu           #+#    #+#              #
-#    Updated: 2025/03/25 23:29:25 by chenxu          ###   ########.fr        #
-#                                                                             #
-# *************************************************************************** #
-
+# TODO: c++23 not support yet
 # FAIL: arrow for linux
 # BUG: arrow -> remove buildin_cling -> root failed
 # TODO: cuda for linux
@@ -17,7 +6,7 @@
 if [[ "$(uname)" == "Darwin" ]]; then
   export LDFLAGS="-L/opt/homebrew/opt/postgresql@14/lib/postgresql@14/"
   export CPPFLAGS="-I/opt/homebrew/opt/postgresql@14/include/postgresql@14/"
-  CMAKE_PARAMS="-Dcocoa=ON -DPOSTGRESQL_LIBRARY=/opt/homebrew/opt/postgresql@14/lib/postgresql@14/libpq.dylib -DPOSTGRESQL_INCLUDE_DIR=/opt/homebrew/opt/postgresql@14/include/"
+  CMAKE_PARAMS="-Dcocoa=ON -DPOSTGRESQL_LIBRARY=/opt/homebrew/opt/postgresql@14/lib/postgresql@14/libpq.dylib -DPOSTGRESQL_INCLUDE_DIR=/opt/homebrew/opt/postgresql@14/include/ -Dcuda=off"
 else
   CMAKE_PARAMS="-GNinja -Dx11=ON -Darrow=ON -Dcuda=ON"
 fi
@@ -38,6 +27,29 @@ cmake -DCMAKE_INSTALL_PREFIX="${HOME}/software/ROOT/install/" ../root ${CMAKE_PA
   -DVc=ON \
   -Dminimal=ON \
   -Dmathmore=ON \
+  -Dasimage=ON \
+  -Dclad=ON \
+  -Ddataframe=ON \
+  -Dfitsio=ON \
+  -Dgdml=ON \
+  -Dgeom=ON \
+  -Dhttp=ON \
+  -Dimt=ON \
+  -Dopengl=ON \
+  -Dpyroot=ON \
+  -Drootfit=ON \
+  -Droot7=ON \
+  -Drpath=ON \
+  -Dspectrum=ON \
+  -Dsqlite=ON \
+  -Dssl=ON \
+  -Dtmva=ON \
+  -Dtmva-cpu=ON \
+  -Dtpython=ON \
+  -Dvc=ON \
+  -Dvdt=ON \
+  -Dwebgui=ON \
+  -Dxrootd=ON \
 
   # -Dfail-on-missing=ON \
 
