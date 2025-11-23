@@ -1,31 +1,38 @@
-# TODO: c++23 not support yet
+# DONE: c++23 not support yet
+# TODO: remove OSX_SYSROOT
 # FAIL: arrow for linux
-# BUG: arrow -> remove buildin_cling -> root failed
+# NOTFIXED: arrow -> remove buildin_cling -> root failed, remmoved
 # TODO: cuda for linux
+# BUG: `new TBrowser` -> builtin_gif=ON rootforum:t/issue-with-root-on-mac-sequoia-still/63435/9
 
 if [[ "$(uname)" == "Darwin" ]]; then
-  export LDFLAGS="-L/opt/homebrew/opt/postgresql@14/lib/postgresql@14/"
-  export CPPFLAGS="-I/opt/homebrew/opt/postgresql@14/include/postgresql@14/"
-  CMAKE_PARAMS="-Dcocoa=ON -DPOSTGRESQL_LIBRARY=/opt/homebrew/opt/postgresql@14/lib/postgresql@14/libpq.dylib -DPOSTGRESQL_INCLUDE_DIR=/opt/homebrew/opt/postgresql@14/include/ -Dcuda=off"
+  # export LDFLAGS="-L/opt/homebrew/opt/postgresql@14/lib/postgresql@14/"
+  # export CPPFLAGS="-I/opt/homebrew/opt/postgresql@14/include/postgresql@14/"
+  # CMAKE_PARAMS="-Dcocoa=ON -DPOSTGRESQL_LIBRARY=/opt/homebrew/opt/postgresql@14/lib/postgresql@14/libpq.dylib -DPOSTGRESQL_INCLUDE_DIR=/opt/homebrew/opt/postgresql@14/include/ -Dcuda=off"
+  CMAKE_PARAMS="-Dcocoa=ON -Dcuda=off"
 else
   CMAKE_PARAMS="-GNinja -Dx11=ON -Darrow=ON -Dcuda=ON"
 fi
 
+ANEWPATH=$(xcrun --sdk macosx --show-sdk-path)
+
+  # -Dbuiltin_cling=ON \  # macos BUG: after upgrade macos
+  # -Dbuiltin_gif=ON \
+  # -Dminimal=ON \
+  # -Dfcgi=ON \
 cmake -DCMAKE_INSTALL_PREFIX="${HOME}/software/ROOT/install/" ../root ${CMAKE_PARAMS} \
-  -DCMAKE_CXX_STANDARD=20 \
+  -DCMAKE_OSX_SYSROOT=${ANEWPATH} \
+  -DCMAKE_CXX_STANDARD=17 \
   -Dbuiltin_clang=ON \
-  -Dbuiltin_cling=ON \
   -Dfftw3=ON \
   -Dxml=ON \
   -Dunfold=ON \
   -Dgviz=ON \
   -Dveccore=ON \
   -DGviz=ON \
-  -Dfcgi=ON \
   -Darrow=ON \
   -Ddavix=ON \
-  -DVc=ON \
-  -Dminimal=ON \
+  -Dvc=ON \
   -Dmathmore=ON \
   -Dasimage=ON \
   -Dclad=ON \
@@ -37,7 +44,7 @@ cmake -DCMAKE_INSTALL_PREFIX="${HOME}/software/ROOT/install/" ../root ${CMAKE_PA
   -Dimt=ON \
   -Dopengl=ON \
   -Dpyroot=ON \
-  -Drootfit=ON \
+  -Droofit=ON \
   -Droot7=ON \
   -Drpath=ON \
   -Dspectrum=ON \
